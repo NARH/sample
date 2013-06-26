@@ -17,7 +17,7 @@
     <packaging>pom</packaging>
   
     <name>Sample main module</name>
-    <description>Sampel modules</description>
+    <description>Sample modules</description>
     <!-- ライセンス情報 -->
     <licenses>
         <license>
@@ -29,7 +29,10 @@
     
     <!-- 含まれるモージュール -->
     <modules>
+        <module>sample-core</module>
         <module>sample-domains</module>
+        <module>sample-war</module>
+        <module>sample-test</module>
     </modules>
     
     <!-- 配布先リモートリポジトリ -->
