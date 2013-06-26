@@ -2,15 +2,17 @@
     <modelVersion>4.0.0</modelVersion>
     
     <!-- プロジェクト基点情報 -->
+    <!--
     <parent>
         <groupId>jp.nrt.sample</groupId>
         <artifactId>sample</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    -->
 
     <!-- プロジェクト情報 -->
     <groupId>jp.nrt.sample.main</groupId>
-    <artifactId>pom</artifactId>
+    <artifactId>sample</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
   
@@ -27,7 +29,7 @@
     
     <!-- 含まれるモージュール -->
     <modules>
-        <module>domains</module>
+        <module>sample-domains</module>
     </modules>
     
     <!-- 配布先リモートリポジトリ -->
