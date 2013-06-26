@@ -10,7 +10,7 @@
     </parent>
 
     <!-- プロジェクト情報 -->
-	<groupId>jp.nrt.sample.app</groupId>
+    <groupId>jp.nrt.sample.app</groupId>
     <artifactId>sample-core</artifactId>
     <description>Sample core module</description>
 
@@ -33,6 +33,7 @@
                     </archive>
                 </configuration>
             </plugin>
+            
         </plugins>
     </build>
 </project>

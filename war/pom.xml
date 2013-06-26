@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">   
     <modelVersion>4.0.0</modelVersion>
     
-    <!-- ƒvƒƒWƒFƒNƒgŠî“_î•ñ -->
+    <!-- ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåŸºç‚¹æƒ…å ± -->
     <parent>
         <groupId>jp.nrt.sample.main</groupId>
         <artifactId>sample</artifactId>
@@ -9,12 +9,97 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <!-- ƒvƒƒWƒFƒNƒgî•ñ -->
-	<groupId>jp.nrt.sample.app</groupId>
+    <!-- ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆæƒ…å ± -->
+    <groupId>jp.nrt.sample.app</groupId>
     <artifactId>sample-war</artifactId>
+    <packaging>war</packaging>
+    
     <description>Sample war module</description>
+    
+    <!-- ä¾å­˜ãƒ•ã‚¡ã‚¤ãƒ« -->
+    <dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>jp.nrt.sample.app</groupId>
+            <artifactId>sample-core</artifactId>
+            <classifier>jar-with-dependencies</classifier>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
-    <!-- ‘S‘Ì build -->
+    <!-- å…¨ä½“ build -->
     <build>
+        <finalName>sample</finalName>
+        
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                    <archive>
+                        <manifest>
+                            <mainClass>Main</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>list-dependencies</id>
+                        <goals>
+                            <goal>list</goal>
+                        </goals>
+                        <configuration>
+                            <output>${project.build.outputDirectory}/dependencies.txt</output>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>executable-war-header</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeGroupIds>jp.nrt.sample.app</includeGroupIds>
+                            <includeArtifactIds>executable-war</includeArtifactIds>
+                            <includeScope>provided</includeScope>
+                            <include>**/*.class</include>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+                        </configuration>
+                    </execution>
+                    
+                    <execution>
+                        <id>resgen</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifaceItem>
+                                    <groupId>jp.nrt.sample.app</groupId>
+                                    <artifactId>sample-core</artifactId>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF</outputDirectory>
+                                    <destFileName>sample-core.jar</destFileName>
+                                </artifaceItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>
