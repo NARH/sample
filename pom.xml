@@ -27,10 +27,7 @@
     
     <!-- 含まれるモージュール -->
     <modules>
-        <module>core</module>
-        <module>test</module>
         <module>domains</module>
-	<module>war</module>
     </modules>
     
     <!-- 配布先リモートリポジトリ -->
