@@ -10,6 +10,7 @@
     </parent>
 
     <!-- プロジェクト情報 -->
+	<groupId>jp.nrt.sample.app</groupId>
     <artifactId>sample-war</artifactId>
     <description>Sample war module</description>
 

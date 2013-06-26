@@ -3,14 +3,14 @@
     
     <!-- プロジェクト基点情報 -->
     <parent>
-        <groupId>jp.nrt.sample.web</groupId>
+        <groupId>jp.nrt.sample.app.web</groupId>
         <artifactId>sample-domains</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <!-- プロジェクト情報 -->
-	<groupId>jp.nrt.sample.web</groupId>
+	<groupId>jp.nrt.sample.app.web</groupId>
     <artifactId>sample-domain1</artifactId>
 	<packaging>pom</packaging>
 	
