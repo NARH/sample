@@ -26,13 +26,13 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    
-    <!-- 含まれるモージュール -->
+
+    <!-- モジュール -->
     <modules>
-        <module>sample-core</module>
-        <module>sample-domains</module>
-        <module>sample-war</module>
-        <module>sample-test</module>
+        <module>core</module>
+        <module>domains</module>
+        <module>war</module>
+        <module>test</module>
     </modules>
     
     <!-- 配布先リモートリポジトリ -->

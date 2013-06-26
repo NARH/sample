@@ -1,7 +1,7 @@
-ï»¿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">   
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">   
     <modelVersion>4.0.0</modelVersion>
     
-    <!-- ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåŸºç‚¹æƒ…å ± -->
+    <!-- ƒvƒƒWƒFƒNƒgŠî“_î•ñ -->
     <parent>
         <groupId>jp.nrt.sample.app.web</groupId>
         <artifactId>sample-domains</artifactId>
@@ -9,14 +9,12 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <!-- ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆæƒ…å ± -->
-	<groupId>jp.nrt.sample.app.web</groupId>
+    <!-- ƒvƒƒWƒFƒNƒgî•ñ -->
     <artifactId>sample-domain1</artifactId>
-	<packaging>pom</packaging>
 	
     <description>Sample domain1 resource</description>
 
-    <!-- å…¨ä½“ build -->
+    <!-- ‘S‘Ì build -->
     <build>
     </build>
 </project>

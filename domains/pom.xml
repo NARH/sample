@@ -1,7 +1,7 @@
-ï»¿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">   
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">   
     <modelVersion>4.0.0</modelVersion>
     
-    <!-- ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆåŸºç‚¹æƒ…å ± -->
+    <!-- ƒvƒƒWƒFƒNƒgŠî“_î•ñ -->
     <parent>
         <groupId>jp.nrt.sample.main</groupId>
         <artifactId>sample</artifactId>
@@ -9,17 +9,19 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <!-- ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆæƒ…å ± -->
+    <!-- ƒvƒƒWƒFƒNƒgî•ñ -->
 	<groupId>jp.nrt.sample.app.web</groupId>
     <artifactId>sample-domains</artifactId>
+    <packaging>pom</packaging>
+    
     <description>Sample domain resource</description>
 
-    <!-- å«ã¾ã‚Œã‚‹ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ« -->
+    <!-- ƒ‚ƒWƒ…[ƒ‹ -->
     <modules>
         <module>domain1</module>
     </modules>
 
-    <!-- å…¨ä½“ build -->
+    <!-- ‘S‘Ì build -->
     <build>
     </build>
 </project>

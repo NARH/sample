@@ -3,7 +3,7 @@
     
     <!-- プロジェクト基点情報 -->
     <parent>
-        <groupId>jp.nrt.sample</groupId>
+        <groupId>jp.nrt.sample.main</groupId>
         <artifactId>sample</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
