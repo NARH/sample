@@ -24,13 +24,12 @@
             <version>7.0</version>
             <type>jar</type>
         </dependency>
-        
         <dependency>
             <groupId>jp.nrt.sample.app</groupId>
             <artifactId>sample-core</artifactId>
-            <classifier>jar-with-dependencies</classifier>
+            <!-- <classifier>jar-with-dependencies</classifier> -->
             <version>${project.version}</version>
-            <scope>provided</scope>
+            <!-- <scope>provided</scope> -->
         </dependency>
     </dependencies>
 

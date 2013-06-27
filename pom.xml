@@ -67,32 +67,36 @@
     </scm>
     
     <!-- リソースリポジトリ -->
+    <!--
     <repositories>
         <repository>
             <id>repo.nrt.jp</id>
             <url>http://repo.nrt.jp/public/</url>
             <releases>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
     </repositories>
+    -->
     
     <!-- プラグインリポジトリ -->
+    <!--
     <pluginRepositories>
         <pluginRepository>
             <id>repo.nrt.jp</id>
             <url>http://repo.nrt.jp/public/</url>
             <releases>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+    -->
     
     <!-- 全体プロパティ -->
     <properties>
