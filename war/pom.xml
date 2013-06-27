@@ -18,19 +18,22 @@
     
     <!-- 依存ファイル -->
     <dependencies>
+        
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
             <type>jar</type>
         </dependency>
+        
         <dependency>
             <groupId>jp.nrt.sample.app</groupId>
             <artifactId>sample-core</artifactId>
-            <!-- <classifier>jar-with-dependencies</classifier> -->
+            <classifier>jar-with-dependencies</classifier>
             <version>${project.version}</version>
-            <!-- <scope>provided</scope> -->
+            <scope>provided</scope>
         </dependency>
+        
     </dependencies>
 
     <!-- 全体 build -->
@@ -73,7 +76,7 @@
                         </goals>
                         <configuration>
                             <includeGroupIds>jp.nrt.sample.app</includeGroupIds>
-                            <includeArtifactIds>executable-war</includeArtifactIds>
+                            <includeArtifactIds>sample-core</includeArtifactIds>
                             <includeScope>provided</includeScope>
                             <include>**/*.class</include>
                             <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
@@ -91,13 +94,32 @@
                                 <artifaceItem>
                                     <groupId>jp.nrt.sample.app</groupId>
                                     <artifactId>sample-core</artifactId>
-                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
                                     <destFileName>sample-core.jar</destFileName>
                                 </artifaceItem>
                             </artifactItems>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+                           
+            <plugin>
+                <groupId>com.cloudbees</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.7</version>
+                <configuration>
+                    <generateLicenseXml>${project.build.outputDirectory}/META-INF/licenses.xml</generateLicenseXml>
+                    <generateLicenseHtml>${project.build.outputDirectory}/META-INF/licenses.html</generateLicenseHtml>
+                    <attach>true</attach>
+                    <inlineScript>
+                        filter {
+                            def d = project.dependencies.find { it.artifactId=="sample-core" };
+                            def a = mojo.artifactFactory.createProjectArtifact(d.groupId,d.artifactId,d.version);
+                            def p = mojo.projectBuilder.buildFromRepository(a, project.getRemoteArtifactRepositories(), mojo.localRepository)
+                            models.put(a,p);
+                        }
+                    </inlineScript>
+                </configuration>
             </plugin>
         </plugins>
     </build>
