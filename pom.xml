@@ -105,6 +105,7 @@
         <!-- ライブラリのバージョン -->
         <felix.version>4.2.1</felix.version>
         <embedded-glassfish.version>3.1.1</embedded-glassfish.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
     
@@ -119,6 +120,12 @@
             
             <dependency>
                 <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
@@ -127,6 +134,18 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-nop</artifactId>
                 <version>${slf4j.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.14</version>
             </dependency>
             
             <dependency>
@@ -149,9 +168,16 @@
             
             <dependency>
                 <groupId>javax</groupId>
-                <artifactId>javaee-api</artifactId>
+                <artifactId>javaee-web-api</artifactId>
                 <version>7.0</version>
             </dependency>
+            
+            <!--
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+            </dependency> -->
             
             <dependency>
                 <groupId>org.glassfish.extras</groupId>
@@ -164,6 +190,19 @@
                 <artifactId>org.apache.felix.framework</artifactId>
                 <version>${felix.version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>3.2.3.RELEASE</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            
         </dependencies>
     </dependencyManagement>
     
@@ -267,6 +306,7 @@
                     <artifactId>maven-junit4osgi-plugin</artifactId>
                     <version>1.0.0</version>
                 </plugin>
+                
             </plugins>            
         </pluginManagement>
         
