@@ -2,20 +2,22 @@
     <modelVersion>4.0.0</modelVersion>
     
     <!-- プロジェクト基点情報 -->
+    <!--
     <parent>
         <groupId>jp.nrt.sample</groupId>
         <artifactId>sample</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    -->
 
     <!-- プロジェクト情報 -->
     <groupId>jp.nrt.sample.main</groupId>
-    <artifactId>pom</artifactId>
+    <artifactId>sample</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
   
     <name>Sample main module</name>
-    <description>Sampel modules</description>
+    <description>Sample modules</description>
     <!-- ライセンス情報 -->
     <licenses>
         <license>
@@ -24,13 +26,13 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    
-    <!-- 含まれるモージュール -->
+
+    <!-- モジュール -->
     <modules>
         <module>core</module>
-        <module>test</module>
         <module>domains</module>
-	<module>war</module>
+        <module>war</module>
+        <module>test</module>
     </modules>
     
     <!-- 配布先リモートリポジトリ -->
@@ -65,39 +67,45 @@
     </scm>
     
     <!-- リソースリポジトリ -->
+    <!--
     <repositories>
         <repository>
             <id>repo.nrt.jp</id>
             <url>http://repo.nrt.jp/public/</url>
             <releases>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
     </repositories>
+    -->
     
     <!-- プラグインリポジトリ -->
+    <!--
     <pluginRepositories>
         <pluginRepository>
             <id>repo.nrt.jp</id>
             <url>http://repo.nrt.jp/public/</url>
             <releases>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+    -->
     
     <!-- 全体プロパティ -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <!-- ライブラリのバージョン -->
+        <felix.version>4.2.1</felix.version>
         <embedded-glassfish.version>3.1.1</embedded-glassfish.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
         <slf4j.version>1.7.5</slf4j.version>
     </properties>
     
@@ -112,6 +120,12 @@
             
             <dependency>
                 <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
@@ -120,6 +134,18 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-nop</artifactId>
                 <version>${slf4j.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.14</version>
             </dependency>
             
             <dependency>
@@ -142,9 +168,16 @@
             
             <dependency>
                 <groupId>javax</groupId>
-                <artifactId>javaee-api</artifactId>
+                <artifactId>javaee-web-api</artifactId>
                 <version>7.0</version>
             </dependency>
+            
+            <!--
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+            </dependency> -->
             
             <dependency>
                 <groupId>org.glassfish.extras</groupId>
@@ -152,6 +185,24 @@
                 <version>${embedded-glassfish.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.framework</artifactId>
+                <version>${felix.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>3.2.3.RELEASE</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            
         </dependencies>
     </dependencyManagement>
     
@@ -243,6 +294,19 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.3</version>
                 </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>2.4.0</version>
+                </plugin>
+                
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-junit4osgi-plugin</artifactId>
+                    <version>1.0.0</version>
+                </plugin>
+                
             </plugins>            
         </pluginManagement>
         

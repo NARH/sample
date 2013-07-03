@@ -3,17 +3,157 @@
     
     <!-- プロジェクト基点情報 -->
     <parent>
-        <groupId>jp.nrt.sample</groupId>
+        <groupId>jp.nrt.sample.main</groupId>
         <artifactId>sample</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <!-- プロジェクト情報 -->
+    <groupId>jp.nrt.sample.app</groupId>
     <artifactId>sample-war</artifactId>
+    <packaging>war</packaging>
+    
     <description>Sample war module</description>
+    
+    <!-- 依存ファイル -->
+    <dependencies>
+        
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <type>jar</type>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+            
+        <dependency>
+            <groupId>jp.nrt.sample.app</groupId>
+            <artifactId>sample-core</artifactId>
+            <classifier>jar-with-dependencies</classifier>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+    </dependencies>
 
     <!-- 全体 build -->
     <build>
+        <finalName>sample</finalName>
+        
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                    <archive>
+                        <manifest>
+                            <mainClass>Main</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>list-dependencies</id>
+                        <goals>
+                            <goal>list</goal>
+                        </goals>
+                        <configuration>
+                            <output>${project.build.outputDirectory}/dependencies.txt</output>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>executable-war-header</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeGroupIds>jp.nrt.sample.app</includeGroupIds>
+                            <includeArtifactIds>sample-core</includeArtifactIds>
+                            <includeScope>provided</includeScope>
+                            <include>**/*.class</include>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+                        </configuration>
+                    </execution>
+                    
+                    <execution>
+                        <id>resgen</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifaceItem>
+                                    <groupId>jp.nrt.sample.app</groupId>
+                                    <artifactId>sample-core</artifactId>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+                                    <destFileName>sample-core.jar</destFileName>
+                                </artifaceItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+                           
+            <plugin>
+                <groupId>com.cloudbees</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.7</version>
+                <configuration>
+                    <generateLicenseXml>${project.build.outputDirectory}/META-INF/licenses.xml</generateLicenseXml>
+                    <generateLicenseHtml>${project.build.outputDirectory}/META-INF/licenses.html</generateLicenseHtml>
+                    <attach>true</attach>
+                    <inlineScript>
+                        filter {
+                            def d = project.dependencies.find { it.artifactId=="sample-core" };
+                            def a = mojo.artifactFactory.createProjectArtifact(d.groupId,d.artifactId,d.version);
+                            def p = mojo.projectBuilder.buildFromRepository(a, project.getRemoteArtifactRepositories(), mojo.localRepository)
+                            models.put(a,p);
+                        }
+                    </inlineScript>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
